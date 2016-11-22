@@ -1,23 +1,25 @@
-/*=========================================================================
+/*============================================================================
 
-  Revision:       $Revision: 7784 $
-  Last changed:   $Date: 2016-01-12 12:07:31 +1100 (Tue, 12 Jan 2016) $
+Copyright 2016 by:
 
-  Copyright 2016 by:
+Commonwealth Scientific and Industrial Research Organisation (CSIRO)
 
-    Commonwealth Scientific and Industrial Research Organisation (CSIRO)
-    
-    This file is licensed by CSIRO under the copy of the CSIRO Binary  
-    License Agreement included with the file when downloaded or obtained 
-    from CSIRO (including any Supplementary License).  If no copy was 
-    included, you must obtain a new copy of the Software from CSIRO before 
-    any use is permitted.
+This file is licensed by CSIRO under the copy of the CSIRO Open Source
+Software License Agreement (variation of the BSD / MIT License) included
+with the file.
 
-    For further information, contact: workspace@csiro.au
+As a condition of this license, you agree that where you make any
+adaptations, modifications, further developments, or additional features
+available to CSIRO or the public in connection with your access to the
+Software, you do so on the terms of the BSD 3-Clause License template,
+a copy available at: http://opensource.org/licenses/BSD-3-Clause
 
-  This copyright notice must be included with all copies of the source code.
+For further information, contact the CSIRO Workspace Team:
+workspace@csiro.au
 
-===========================================================================*/
+This copyright notice must be included with all copies of the source code.
+
+============================================================================*/
 
 /**
  * \file

@@ -1,0 +1,66 @@
+<!DOCTYPE serializeddata>
+<operation atomic="false" label="Root" bgcolor="4280839393" id="{9c0c3149-1004-4b1c-a433-97066558c841}" plugin="www.csiro.au/workspace/builtin" type="Workspace">
+ <environment>
+  <platform>windows 64bit</platform>
+  <lastModified>2016-11-22T11:47:55</lastModified>
+  <plugin uri="www.csiro.au/workspace/packages/3.7.0/Windows/x86_64" name="www.csiro.au/workspace/builtin"/>
+  <plugin uri="www.csiro.au/workspace/packages/3.7.0/Windows/x86_64" name="www.csiro.au/workspace/dataanalysis"/>
+  <plugin uri="www.csiro.au/workspace/opencv/0.1.0/Windows/x86_64" name="www.csiro.au/workspace/opencv"/>
+ </environment>
+ <input name="Dependencies" size="0"/>
+ <displays>
+  <widgetwindow floating="false" docklocation="2">
+   <iobase wsDataPath="wsDataPath:{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}:output:TileSet"/>
+   <displaywidget displayWidgetName="CSIRO::DataAnalysis::ImageTileView"/>
+   <geometry>AdnQywACAAAAAAAAAAAAFgAAAucAAAMtAAAAAAAAABYAAALnAAADLQAAAAEAAAAAB4A=</geometry>
+   <properties/>
+  </widgetwindow>
+ </displays>
+ <wsnotes>
+  <wsnote id="{09bb2260-29b4-4d12-94d9-dd06a58577d3}" y="-150" text="cv::Mat ->QImage&#xa;" width="104" x="-1037"/>
+  <wsnote id="{98fa3692-1db1-4734-a0f6-6c5fe8b61042}" y="70" text="QImage->cv::Mat" width="104" x="-1020"/>
+ </wsnotes>
+ <operation label="OpenCV read image" bgcolor="4284395451" id="{440c76cf-e21d-4b79-ad60-a84ffd77fcdd}" plugin="www.csiro.au/workspace/opencv" type="OpenCV ImageReader">
+  <input name="Dependencies" size="0"/>
+  <input preferredwidget="CSIRO::Widgets::FileNameWidget" name="File name">http://melbourne-things-to-do.com.au/wp-content/uploads/2015/03/Melbourne-2.jpg</input>
+  <view y="-286" width="168" height="90" x="-1132"/>
+ </operation>
+ <operation label="OpenCV invert image" bgcolor="4284395451" id="{e1b26cd8-520e-45e9-81ae-e08437adbf09}" plugin="www.csiro.au/workspace/opencv" type="OpenCV InvertImage">
+  <input name="Dependencies" size="0"/>
+  <view y="-286" width="168" height="90" x="-852"/>
+ </operation>
+ <operation label="Resize Image" bgcolor="4284395451" id="{edb7fa2c-3dfb-4e23-be45-67d556bb742d}" dataplugin="www.csiro.au/workspace/dataanalysis" plugin="www.csiro.au/workspace/dataanalysis" type="ResizeImage" dataname="Image" datatype="QImage">
+  <input name="Dependencies" size="0"/>
+  <input name="Width">50</input>
+  <input name="Height">100</input>
+  <input name="Units">1</input>
+  <input name="Smoothing">1</input>
+  <input name="Mirror X">1</input>
+  <input name="Mirror Y">0</input>
+  <view y="-119" width="168" height="176" x="-1132"/>
+ </operation>
+ <operation label="Create Image Tile Set" bgcolor="4284395451" id="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" plugin="www.csiro.au/workspace/dataanalysis" type="CreateImageTileSet">
+  <input name="Dependencies" size="0"/>
+  <input name="Images" size="4"/>
+  <input name="Images per line (0=auto)">0</input>
+  <output preferredwidget="CSIRO::DataAnalysis::ImageTileView" name="TileSet"/>
+  <view y="-116" width="168" height="170" x="-732"/>
+ </operation>
+ <operation label="OpenCV invert image" bgcolor="4284395451" id="{d6d74a0b-4018-47f0-9479-bfc44c6811f6}" plugin="www.csiro.au/workspace/opencv" type="OpenCV InvertImage">
+  <input name="Dependencies" size="0"/>
+  <output globalname="invertedAndResized" preferredwidget="CSIRO::OpenCV::MatWidget" name="Mat"/>
+  <view y="154" width="168" height="90" x="-942"/>
+ </operation>
+ <operation label="Create Image Tile Set dependency" bgcolor="4294931456" id="{27d556d1-36c8-4997-a0fc-a325bf403589}" dataplugin="www.csiro.au/workspace/builtin" plugin="www.csiro.au/workspace/builtin" type="WorkspaceOutput" dataname="Create Image Tile Set dependency" datatype="CSIRO::DataExecution::Dependency">
+  <input name="Dependencies" size="0"/>
+  <view y="-76" width="168" height="90" x="-562"/>
+ </operation>
+ <connection from_op="{edb7fa2c-3dfb-4e23-be45-67d556bb742d}" dest_name="Images" to_op="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" src_name="Image" copy="false" dest_index="2"/>
+ <connection from_op="{440c76cf-e21d-4b79-ad60-a84ffd77fcdd}" dest_name="Mat" to_op="{e1b26cd8-520e-45e9-81ae-e08437adbf09}" src_name="Mat" copy="false"/>
+ <connection from_op="{440c76cf-e21d-4b79-ad60-a84ffd77fcdd}" dest_name="Images" to_op="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" src_name="Mat" copy="false" dest_index="0"/>
+ <connection from_op="{e1b26cd8-520e-45e9-81ae-e08437adbf09}" dest_name="Images" to_op="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" src_name="Mat" copy="false" dest_index="1"/>
+ <connection from_op="{440c76cf-e21d-4b79-ad60-a84ffd77fcdd}" dest_name="Image" to_op="{edb7fa2c-3dfb-4e23-be45-67d556bb742d}" src_name="Mat" copy="false"/>
+ <connection from_op="{edb7fa2c-3dfb-4e23-be45-67d556bb742d}" dest_name="Mat" to_op="{d6d74a0b-4018-47f0-9479-bfc44c6811f6}" src_name="Image" copy="false"/>
+ <connection from_op="{d6d74a0b-4018-47f0-9479-bfc44c6811f6}" dest_name="Images" to_op="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" src_name="Mat" copy="false" dest_index="3"/>
+ <connection from_op="{b8cb7e5e-6496-4bfa-b692-af3ef0ef910c}" dest_name="Create Image Tile Set dependency" to_op="{27d556d1-36c8-4997-a0fc-a325bf403589}" src_name="Dependencies" copy="false"/>
+</operation>

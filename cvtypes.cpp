@@ -46,22 +46,29 @@ QImage convertMatToQImage(const cv::Mat& srcImage)
 	QImage result;
     
     switch ( srcImage.type() )
-    {            
-         // 8-bit, 4 channel
-         case CV_8UC4:         
-			result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB32).rgbSwapped();
-			break;
+    {  
+        // 8-bit, 4 channel
+        case CV_8UC4:
+            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB32).rgbSwapped();
+            break;
 
-         // 8-bit, 3 channel
-		 case CV_8UC3:         
-			result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB888).rgbSwapped();
-			break;
+        // 8-bit, 3 channel
+        case CV_8UC3:
+            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB888).rgbSwapped();
+            break;
 
-		 // 8-bit, 1 channel
-		 case CV_8UC1:
+        // 8-bit, 1 channel
+        case CV_8UC1:
             result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_Grayscale8).copy();
             break;
-            
+        
+        case CV_32F:
+        {
+            cv::Mat mat;
+            srcImage.convertTo(mat, CV_8UC1, 255, 0);
+            result = QImage(mat.data, mat.cols, mat.rows, (int)mat.step, QImage::Format_Grayscale8).copy();
+            break;
+        }            
         default:
 			OpenCVPlugin::getInstance().logText(
                 "ERROR: Cannot convert OpenCV image to QImage - cv::Mat image type (" + 

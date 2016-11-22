@@ -34,6 +34,7 @@
 #include "Datatypes/mattoqimageadaptor.h"
 #include "Datatypes/qimagetomatadaptor.h"
 
+#include "Operations/convert32fmat.h"
 #include "Operations/invertimage.h"
 #include "Operations/imagereader.h"
 
@@ -112,6 +113,7 @@ namespace OpenCV
 #endif
 
         //// Add your operation factories like this:
+        addFactory(DataExecution::OperationFactoryTraits<Convert32fMat>::getInstance()); 
         addFactory(DataExecution::OperationFactoryTraits<InvertImage>::getInstance());
         addFactory(DataExecution::OperationFactoryTraits<ImageReader>::getInstance());
 

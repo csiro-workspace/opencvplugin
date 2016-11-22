@@ -46,8 +46,9 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
+
+# Stop OpenCV RelWithDebInfo build trying to use the debug libs (kaboom!)
 if(WIN32)
-    # Stop OpenCV RelWithDebInfo build trying to use the debug libs (kaboom!)
     set_target_properties(${OpenCV_LIBS} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
 endif()
 
@@ -124,4 +125,4 @@ foreach(inFile ${INSTALL_HEADERS})
 endforeach(inFile)
 
 add_subdirectory(Designer)
-
+add_subdirectory(Tests)

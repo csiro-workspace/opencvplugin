@@ -21,23 +21,8 @@
 #
 #============================================================================
 
-list(APPEND HEADERS
-    ${OPENCV_SOURCE_DIR}/Operations/convert32fmat.h
-    ${OPENCV_SOURCE_DIR}/Operations/invertimage.h
-    ${OPENCV_SOURCE_DIR}/Operations/imagereader.h
-)
+# Defined in <workspace>\cmake\site_cmake\FindWorkspaceTest.cmake
+find_package(WorkspaceTest)
 
-list(APPEND INSTALL_HEADERS
-    ${OPENCV_SOURCE_DIR}/Operations/convert32fmat.h
-    ${OPENCV_SOURCE_DIR}/Operations/invertimage.h
-    ${OPENCV_SOURCE_DIR}/Operations/imagereader.h
-)
+add_workspace_test(test_imagereader QTTEST NEED_XSERVER LIBRARIES workspace opencvplugin)
 
-list(APPEND SOURCES
-    ${OPENCV_SOURCE_DIR}/Operations/convert32fmat.cpp
-    ${OPENCV_SOURCE_DIR}/Operations/invertimage.cpp
-    ${OPENCV_SOURCE_DIR}/Operations/imagereader.cpp
-)
-
-list(APPEND UI_SOURCES
-)
