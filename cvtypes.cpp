@@ -49,12 +49,14 @@ QImage convertMatToQImage(const cv::Mat& srcImage)
     {  
         // 8-bit, 4 channel
         case CV_8UC4:
-            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB32).rgbSwapped();
+            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGBA8888);
+            result = result.rgbSwapped(); // Don't rgbSwapped() on the temporary above or it will call the rvalue (in_place) swap which modified the source cv::Mat data!
             break;
 
         // 8-bit, 3 channel
         case CV_8UC3:
-            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB888).rgbSwapped();
+            result = QImage(srcImage.data, srcImage.cols, srcImage.rows, (int)srcImage.step, QImage::Format_RGB888);
+            result = result.rgbSwapped(); // Don't rgbSwapped() on the temporary above or it will call the rvalue (in_place) swap which modified the source cv::Mat data!
             break;
 
         // 8-bit, 1 channel
@@ -76,7 +78,7 @@ QImage convertMatToQImage(const cv::Mat& srcImage)
                 ") not supported\n");
             break;		
 	} 
-
+    
     return result;
 }
 

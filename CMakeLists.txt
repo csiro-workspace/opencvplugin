@@ -106,17 +106,10 @@ set_target_properties(opencvplugin PROPERTIES
 setTargetOutputDirectory(opencvplugin ${CSIRO_INSTALL_AREA}/lib/Plugins)
 configure_file(pkg-opencvplugin.cmake ${CSIRO_INSTALL_AREA}/cmake/Exports/pkg-opencvplugin.cmake @ONLY)
 
-# If your plugin is dependent on any other dynamic libraries you can add the root path 
-# of that library (the path above the lib, bin and include) as a new line to the installAreas
-# file below. Anything in this file will be added to the path on Workspace startup.
-#
-# CMake probably wont have write access into the Workspace install area so we simply print a 
-# message for the user.
-file(WRITE ${CSIRO_INSTALL_AREA}/installAreas/installArea-opencvplugin.txt "${CSIRO_INSTALL_AREA}")
 foreach(iPath ${OpenCV_LIB_DIR})
-    file(APPEND ${CSIRO_INSTALL_AREA}/installAreas/installArea-opencvplugin.txt "\n${iPath}/..")
+    list(APPEND EXTRA_INSTALL_AREAS "\n${iPath}/..")
 endforeach()
-message(STATUS "Copy ${CSIRO_INSTALL_AREA}/installAreas/installArea-opencvplugin.txt into ${WORKSPACE_CMAKE_ROOT}/../installAreas to auto-load your plugin on startup")
+set_install_area_file(opencvplugin "${CSIRO_INSTALL_AREA}" ${EXTRA_INSTALL_AREAS})
 
 # Copy our install headers into the install directory so that others can build against our plugin.
 foreach(inFile ${INSTALL_HEADERS})

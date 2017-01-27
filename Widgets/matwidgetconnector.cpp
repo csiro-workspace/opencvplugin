@@ -74,5 +74,12 @@ namespace OpenCV
         dataObject.ensureHasData();
         widget->updateData(dataObject.getRawData<cv::Mat>());
     }
+
+#if CSIRO_WORKSPACE_VERSION_MAJOR >= 4
+    /**
+     *
+     */
+    void  MatWidgetConnector::setWidgetReadOnly(bool b) { }
+#endif
 }}
 

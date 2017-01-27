@@ -50,6 +50,10 @@ namespace OpenCV
 
     public:
         MatWidgetConnector(QWidget& widget, const CSIRO::Widgets::NamePath& namePath);
+
+#if CSIRO_WORKSPACE_VERSION_MAJOR >= 4
+        virtual  void  setWidgetReadOnly(bool b) override;
+#endif
     };
 }}
 

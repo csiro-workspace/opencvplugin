@@ -83,7 +83,7 @@ namespace OpenCV
         QString fileName = CSIRO::System::Utilities::downloadIfRemote(dataFileName, op_.getLabel());
 
         // Load mat
-        matOut = cv::imread(fileName.toLatin1().constData(), -CV_LOAD_IMAGE_ANYDEPTH);
+		matOut = cv::imread(fileName.toLatin1().constData(), CV_LOAD_IMAGE_UNCHANGED);
 
         // Check for success
         if (matOut.data == NULL) {
